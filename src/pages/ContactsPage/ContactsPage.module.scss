@@ -1,0 +1,31 @@
+@import 'src/scss/utils/settings';
+
+.contacts-page{
+    min-height: 100vh;
+    padding-bottom: 10vh;;
+
+    
+    &__form, &__form-panel{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    &__form{
+        &-button{
+            margin-left: 3vw;
+        }
+    }
+
+    &__content-section{
+        margin-top: 3rem;
+
+        &__control{
+            margin-bottom: 1.5rem;
+        }
+    }
+
+    &__pagination-wrapper{
+        margin-top: 10vh;
+    }
+}

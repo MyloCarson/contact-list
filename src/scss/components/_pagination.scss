@@ -1,0 +1,28 @@
+@import "../utils/settings";
+
+.pagination{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    &__page-number{
+        font-size: getValueInEM(18px);
+        color: map-get($primary-pallet, dark );
+        margin: 0 8px;
+        padding: 4px 8px;
+        cursor: pointer;
+
+        &.active{
+            border-radius: 50%;
+            background-color: map-get($primary-pallet, mid );
+            font-weight: 700;
+        }
+        &__container{
+            
+        }
+    }
+
+    &-icon{
+        cursor: pointer;
+    }
+}

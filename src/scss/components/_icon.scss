@@ -1,0 +1,18 @@
+@import "../utils/settings";
+.icon{
+    
+    &-edit{
+        cursor: pointer;
+        transition: opacity .3s ease-in-out;
+
+        @include desktop{
+            opacity: 0;
+        }
+        @include xxlarge{
+            opacity: 0;
+        }
+        @include xlarge{
+            opacity: 0;
+        }
+    }
+}
