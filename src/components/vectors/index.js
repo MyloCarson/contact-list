@@ -6,6 +6,7 @@ import UserIcon from './UserIcon';
 import EditIcon from './EditIcon';
 import PreviousIcon from './PreviousIcon';
 import NextIcon from './NextIcon';
+import TrashIcon from './TrashIcon';
 
 export {
     TileIcon,
@@ -14,5 +15,6 @@ export {
     UserIcon,
     EditIcon,
     PreviousIcon,
-    NextIcon
+    NextIcon,
+    TrashIcon
 }

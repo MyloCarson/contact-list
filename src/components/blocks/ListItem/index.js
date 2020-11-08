@@ -1,6 +1,6 @@
 import {useContext} from 'react';
 import styles from './ListItem.module.scss';
-import {EditIcon} from 'src/components/vectors';
+import {EditIcon, TrashIcon} from 'src/components/vectors';
 import { CONTACT_CONTEXT } from 'src/constants';
 import PropTypes from 'prop-types';
 
@@ -20,6 +20,10 @@ const ListItem = ({position, first_name, last_name, email, avatar}) => {
         })
     }
 
+    const handleDelete = () => {
+        contactContext.onDeleteContact(position);
+    }
+
     return (
         <div className={styles['list-item']}>
             <div className={styles['list-item__left-pane']}>
@@ -34,6 +38,9 @@ const ListItem = ({position, first_name, last_name, email, avatar}) => {
                 <a href={`mailto:${email}`} className={styles['list-item__email']}>{email}</a>
                 <div className={`icon-edit ${styles['list-item__edit-icon']}`} onClick={edit}>
                     <EditIcon />
+                </div>
+                <div className={`icon-edit ${styles['list-item__edit-icon']}`} onClick={handleDelete}>
+                    <TrashIcon />
                 </div>
             </div>
     

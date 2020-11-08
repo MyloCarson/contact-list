@@ -106,5 +106,9 @@
         position: absolute;
         top: 8px;
         right: 8px;
+
+        &:nth-of-type(2){
+            top: 48px;
+        }
     }
 }

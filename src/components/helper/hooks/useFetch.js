@@ -9,6 +9,9 @@ export const useFetch = (url) => {
 		status: 'idle',
 		error: null,
 		data: [],
+		updateCache: (payload, url) => {
+			updateCacheLocally(payload, url)
+		}
 	};
 
 	const [state, dispatch] = useReducer((state, action) => {
@@ -23,6 +26,13 @@ export const useFetch = (url) => {
 				return state;
 		}
 	}, initialState);
+
+	const updateCacheLocally = (payload, url) => {
+		if(cache.current[url]){
+			cache.current[url] = payload;
+			dispatch({ type: 'FETCHED', payload: payload });
+		}
+	}
 
 	useEffect(() => {
 		let cancelRequest = false;
