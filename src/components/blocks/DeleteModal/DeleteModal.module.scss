@@ -1,0 +1,32 @@
+@import 'src/scss/utils/settings';
+
+.modal{
+    &-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    &-info{
+        text-align: center;
+        color: map-get($primary-pallet, dark );
+        margin-bottom: 4vh;
+    }
+
+    &__button{
+        margin-bottom: 1vh;
+        &-container{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 4vh;
+        
+
+            @include tablet{
+                margin-bottom: 0;
+            }
+        }
+    }
+}

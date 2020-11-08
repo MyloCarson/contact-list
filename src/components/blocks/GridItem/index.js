@@ -1,6 +1,6 @@
 import {useContext} from 'react';
 import styles from './GridItem.module.scss';
-import {EditIcon} from 'src/components/vectors';
+import {EditIcon, TrashIcon} from 'src/components/vectors';
 import { CONTACT_CONTEXT } from 'src/constants';
 import PropTypes from 'prop-types';
 
@@ -18,6 +18,10 @@ const GridItem = ({position, first_name, last_name, email, avatar}) => {
                 avatar
             }
         })
+    }
+
+    const handleDelete = () => {
+        contactContext.onDeleteContact(position);
     }
 
     return (
@@ -40,6 +44,10 @@ const GridItem = ({position, first_name, last_name, email, avatar}) => {
             </div>
             <div className={`icon-edit ${styles['grid-item__icon']}`} onClick={edit}>
                 <EditIcon/>
+            </div>
+
+            <div className={`icon-edit ${styles['grid-item__icon']}`} onClick={handleDelete}>
+                <TrashIcon/>
             </div>
     
         </div>

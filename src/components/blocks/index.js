@@ -9,6 +9,7 @@ import ContactForm from './ContactForm';
 import Pagination from './Pagination'
 import Progress from './Progress';
 import ErrorBoundary from './ErrorBoundary';
+import DeleteModal from './DeleteModal';
 
 export {
     ListItem,
@@ -21,5 +22,6 @@ export {
     ContactForm,
     Pagination,
     Progress,
-    ErrorBoundary
+    ErrorBoundary,
+    DeleteModal
 }

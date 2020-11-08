@@ -9,7 +9,9 @@ const ContactProvider = (props) => {
         showForm: false,
         formAction: ADD_CONTACT,
         contact: EMPTY_FORM_DATA,
-        position: null
+        position: null,
+        deleteIndex: null,
+        showDeleteModal: false
     });
 
     return (
@@ -31,6 +33,21 @@ const ContactProvider = (props) => {
                         showForm,
                         formAction: ADD_CONTACT,
                         contact: EMPTY_FORM_DATA,
+                    })
+                },
+                onDeleteContact: (deleteIndex) => {
+                    setState({
+                        ...state,
+                        deleteIndex,
+                        showDeleteModal: true
+                        
+                    })
+                },
+                closeDeleteModal: () => {
+                    setState({
+                        ...state,
+                        deleteIndex: null,
+                        showDeleteModal: false
                     })
                 }
             }}>

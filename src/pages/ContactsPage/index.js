@@ -2,7 +2,7 @@ import {useState, useEffect, useContext} from 'react';
 import DefaultLayout from 'src/components/layout/DefaultLayout';
 import styles from './ContactsPage.module.scss';
 import {TileIcon,ListIcon} from 'src/components/vectors';
-import {Progress, ErrorBoundary, ContactGrid, ContactList, ContactForm, Pagination} from 'src/components/blocks';
+import {Progress, ErrorBoundary, ContactGrid, ContactList, ContactForm, Pagination,DeleteModal} from 'src/components/blocks';
 import { ADD_CONTACT, BASE_API_ENDPOINT, CONTACT_CONTEXT, GRID, LIST, } from 'src/constants';
 import { getListLayoutType, storeListLayoutType } from 'src/utils';
 import { useFetch } from 'src/components/helper/hooks/useFetch';
@@ -18,12 +18,13 @@ const ContactsPage = () => {
 
     const [listViewType, setListViewType] = useState(getListLayoutType());
     const [showForm, setShowForm] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [metaData, setMetaData] = useState(INITIAL_META_DATA)
 
     const [page, setPage] = useState(1);
     const url = page && `${BASE_API_ENDPOINT}users?page=${page}`;
 
-    const { status, data, error } = useFetch(url);
+    const { status, data, error, updateCache } = useFetch(url);
     const [contacts, setContacts] = useState([])
     
 
@@ -50,13 +51,34 @@ const ContactsPage = () => {
     }
 
     const contactEvent = (contact) => {
+        const _contacts = contacts;
         if(contactContext.state.formAction === ADD_CONTACT){
-            setContacts([...contacts, contact])
+            _contacts.push(contact)
+            setContacts(_contacts)
+            prepareCacheUpdate(_contacts)
+
         } else {
-            const _contact = contacts;
-            _contact[contactContext.state.position] = contact;
-            setContacts(_contact);
+            _contacts[contactContext.state.position] = contact;
+            prepareCacheUpdate(_contacts)
         }
+        
+    }
+
+    const onDeleteEvent = () => {
+        const indexOfContact = contactContext.state.deleteIndex;
+        const _contacts = contacts.filter( (_, index) => index !== indexOfContact );
+        setContacts(_contacts)
+        prepareCacheUpdate(_contacts)
+        contactContext.closeDeleteModal()
+    }
+
+    const prepareCacheUpdate = (_contacts) => {
+        updateCache(
+            {
+                data: _contacts,
+                ...metaData
+            }, url
+        )
     }
 
     const onPageChanged = (pageNumber) => {
@@ -66,6 +88,10 @@ const ContactsPage = () => {
     useEffect(() => {
         setShowForm(contactContext.state.showForm);
     }, [contactContext.state.showForm])
+
+    useEffect(() => {
+        setShowDeleteModal(contactContext.state.showDeleteModal)
+    }, [contactContext.state.showDeleteModal])
 
     useEffect(() => {
         if(data.data){
@@ -105,6 +131,7 @@ const ContactsPage = () => {
                 </section>
             </div>
             {showForm && <ContactForm onClose={toggleShowForm} contactEvent={contactEvent} />}
+            {showDeleteModal && <DeleteModal onDeleteEvent={onDeleteEvent} /> }
         </DefaultLayout>
     )
 }

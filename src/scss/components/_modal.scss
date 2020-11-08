@@ -41,8 +41,11 @@
         }
 
         &--alternate{
-            height: 315px;
-            width: 406px;
+            height: auto;
+            @include tablet{
+                height: 315px;
+                width: 406px;
+            }
         }
     }
     &-header{
